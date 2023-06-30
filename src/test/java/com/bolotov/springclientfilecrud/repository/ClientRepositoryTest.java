@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +28,7 @@ class ClientRepositoryTest {
     void save() {
         Client client = Client.builder()
                 .email("alex@gmail.com")
+                .dateRegistration(LocalDate.now())
                 .build();
 
         clientRepository.save(client);
@@ -32,10 +36,11 @@ class ClientRepositoryTest {
 
     @Test
     void saveWithFile() {
-        List<File> files = new ArrayList<>();
+        Set<File> files = new HashSet<>();
         files.add(File.builder().fileName("zxc").build());
         Client client = Client.builder()
                 .email("boris@gmail.com")
+                .dateRegistration(LocalDate.now())
                 .files(files)
                 .build();
         clientRepository.save(client);

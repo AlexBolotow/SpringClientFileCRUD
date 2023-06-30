@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,9 +18,13 @@ public class FileService {
     private FileRepository fileRepository;
 
     public File init(FileDTO dto) {
+        if (dto.getDateDownload() == null) {
+            dto.setDateDownload(LocalDate.now());
+        }
         return File.builder()
                 .fileName(dto.getFileName())
                 .fileBytes(dto.getFileBytes())
+                .dateDownload(dto.getDateDownload())
                 .build();
     }
 
@@ -26,24 +32,16 @@ public class FileService {
         return fileRepository.save(init(dto));
     }
 
-
     public File findFile(Long id) {
         return fileRepository.findById(id).get();
-    }
-
-    public File findFile(String fileName) {
-        return fileRepository.findByFileName(fileName);
     }
 
     public List<File> findAllFiles() {
         return fileRepository.findAll();
     }
 
+    @Transactional
     public void deleteFile(Long id) {
         fileRepository.deleteById(id);
-    }
-
-    public void deleteFile(String fileName) {
-        fileRepository.deleteByFileName(fileName);
     }
 }

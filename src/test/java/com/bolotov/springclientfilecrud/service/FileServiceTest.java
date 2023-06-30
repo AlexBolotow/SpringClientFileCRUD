@@ -6,28 +6,39 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class FileServiceTest {
-   @Autowired
-   FileService fileService;
+    @Autowired
+    FileService fileService;
 
-   @Test
-    void findFile() {
-       FileDTO fileDTO = new FileDTO("sun.txt", Paths.get("files/sun.txt"));
-       File file = fileService.create(fileDTO);
-       System.out.println(fileService.findFile(file.getFileName()));
-   }
+    @Test
+    void findFile() throws IOException {
+        FileDTO fileDTO1 = new FileDTO();
+        fileDTO1.setFileName("dog.txt");
+        fileDTO1.setDateDownload(LocalDate.now());
+        fileDTO1.setFileBytes(Files.readAllBytes(Paths.get("files/dog.txt")));
 
-   @Test
-    void deleteFile() {
-       FileDTO fileDTO = new FileDTO("grass.txt", Paths.get("files/grass.txt"));
-       File file = fileService.create(fileDTO);
-       fileService.deleteFile(file.getFileName());
-   }
+        File file = fileService.create(fileDTO1);
+        System.out.println(fileService.findFile(file.getId()));
+    }
+
+    @Test
+    void deleteFile() throws IOException {
+        FileDTO fileDTO1 = new FileDTO();
+        fileDTO1.setFileName("dog.txt");
+        fileDTO1.setDateDownload(LocalDate.now());
+        fileDTO1.setFileBytes(Files.readAllBytes(Paths.get("files/dog.txt")));
+
+        File file = fileService.create(fileDTO1);
+        fileService.deleteFile(file.getId());
+    }
 
 }

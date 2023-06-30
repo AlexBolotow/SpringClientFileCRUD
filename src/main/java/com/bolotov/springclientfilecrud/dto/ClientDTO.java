@@ -3,10 +3,12 @@ package com.bolotov.springclientfilecrud.dto;
 import com.bolotov.springclientfilecrud.entity.File;
 import lombok.Data;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 public class ClientDTO {
     private String email;
-    private List<File> files;
+    private Set<File> files;
+    private LocalDate dateRegistration;
 }

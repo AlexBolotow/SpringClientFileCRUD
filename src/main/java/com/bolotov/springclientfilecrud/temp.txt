@@ -1,0 +1,10 @@
+{
+    "id": 136,
+    "email": "qwdqwdsxzz",
+    "files": [{
+        "fileName": "asdasdw",
+        "fileBytes": null,
+        "dateDownload": "2023-06-30"}],
+    "dateRegistration": "2022-07-13"
+}
+

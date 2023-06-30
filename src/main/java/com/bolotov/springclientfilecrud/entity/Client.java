@@ -3,7 +3,8 @@ package com.bolotov.springclientfilecrud.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,5 +22,7 @@ public class Client {
     private String email;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     @JoinColumn(name = "client_id")
-    private List<File> files;
+    private Set<File> files;
+    @Column(name = "date_registration", nullable = false)
+    private LocalDate dateRegistration;
 }
