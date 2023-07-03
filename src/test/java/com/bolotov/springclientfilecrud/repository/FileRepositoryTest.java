@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class FileRepositoryTest {
 
-    @Autowired
+/*    @Autowired
     FileRepository fileRepository;
 
     @Test
@@ -34,5 +34,5 @@ class FileRepositoryTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

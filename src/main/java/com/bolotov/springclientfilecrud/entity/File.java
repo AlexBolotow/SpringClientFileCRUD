@@ -1,18 +1,16 @@
 package com.bolotov.springclientfilecrud.entity;
 
-import lombok.*;
+import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Builder
+@Data
 @Table(name = "file", schema = "public")
 public class File {
     @Id
@@ -23,10 +21,12 @@ public class File {
     private String fileName;
     @Column(name = "file_bytes")
     private byte[] fileBytes;
-    @Column(name = "date_download", nullable = false)
-    private LocalDate dateDownload;
+    @Column(name = "create_date", nullable = false)
+    private LocalDate createDate;
+    @Column(name = "client_id")
+    private long clientId;
 
-    @Override
+/*    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -37,7 +37,7 @@ public class File {
     @Override
     public int hashCode() {
         return Objects.hash(id, fileName);
-    }
+    }*/
 }
 
 

@@ -8,5 +8,6 @@ import java.time.LocalDate;
 public class FileDTO {
     private String fileName;
     private byte[] fileBytes;
-    private LocalDate dateDownload;
+    private LocalDate createDate;
+    private long clientId;
 }

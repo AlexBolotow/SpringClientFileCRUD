@@ -10,5 +10,5 @@ import java.util.Set;
 public class ClientDTO {
     private String email;
     private Set<File> files;
-    private LocalDate dateRegistration;
+    private LocalDate registrationDate;
 }
