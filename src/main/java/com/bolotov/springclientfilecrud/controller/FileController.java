@@ -37,6 +37,4 @@ public class FileController {
         fileService.deleteFile(id);
         return HttpStatus.OK;
     }
-
-
 }

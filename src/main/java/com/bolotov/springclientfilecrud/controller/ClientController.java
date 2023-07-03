@@ -2,19 +2,14 @@ package com.bolotov.springclientfilecrud.controller;
 
 import com.bolotov.springclientfilecrud.dto.ClientDTO;
 import com.bolotov.springclientfilecrud.entity.Client;
+import com.bolotov.springclientfilecrud.entity.File;
 import com.bolotov.springclientfilecrud.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -44,7 +39,7 @@ public class ClientController {
         return new ResponseEntity<>(clientService.findClient(email), HttpStatus.OK);
     }
 
-    @PutMapping
+    @PatchMapping
     public ResponseEntity<Client> update(@RequestBody Client client) {
         return new ResponseEntity<>(clientService.updateClient(client), HttpStatus.OK);
     }
@@ -54,4 +49,15 @@ public class ClientController {
         clientService.deleteClient(id);
         return HttpStatus.OK;
     }
+
+    @GetMapping("/{id}/{date}/findClientFilesStartingFromDate")
+    public ResponseEntity<List<File>> findClientFilesStartingFromDate(@PathVariable Long id, @PathVariable String date) {
+        return new ResponseEntity<>(clientService.findClientFilesStartingFromDate(id, LocalDate.parse(date)), HttpStatus.OK);
+    }
+
+    @GetMapping("/{fileName}/findClientsWithFile")
+    public ResponseEntity<List<Client>> findClientsWithFile(@PathVariable String fileName) {
+        return new ResponseEntity<>(clientService.findClientsWithFile(fileName), HttpStatus.OK);
+    }
+
 }
